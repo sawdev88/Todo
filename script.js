@@ -23,10 +23,11 @@ function deleteTodoItem(index) {
   })
 }
 
-// Prevent window from reloading when enter is pressed
+// Prevent window from reloading & add todo when enter is pressed
 function preventEnter() {
     $(window).keydown(function(e) {
         if (e.keyCode == 13) {
+          addNewTodoItem();
             e.preventDefault();
         }
     });
