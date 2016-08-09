@@ -1,13 +1,12 @@
-var $todoList = $('.todos'),
-    $todoText = $('.todoText'),
-    $todoButton = $('.todoButton');
+var $todoList = $('.todos');
 
 
 // Add item to list
 function addNewTodoItem() {
-    var item = $todoText.val()
+    var $todoText = $('.todoText'),
+        item = $todoText.val();
 
-// Show error is input is empty
+    // Show error is input is empty
     if (item.length >= 1) {
         $todoList.append('<li> ' + item + '</li>');
         $todoText.val('');
@@ -16,38 +15,29 @@ function addNewTodoItem() {
     }
 }
 
+//Add item to list when button is clicked
+$('.todoButton').on('click', addNewTodoItem);
+
 // Delete item when double clicked
-function deleteTodoItem(index) {
-  $todoList.on('dblclick', 'li', function() {
-      $(this).fadeOut();
-  })
-}
+var deleteTodoItem = function(index) {
+    $todoList.on('dblclick', 'li', function() {
+        $(this).fadeOut();
+    })
+}();
 
 // Prevent window from reloading & add todo when enter is pressed
-function preventEnter() {
+var preventEnter = function() {
     $(window).keydown(function(e) {
         if (e.keyCode == 13) {
-          addNewTodoItem();
+            addNewTodoItem();
             e.preventDefault();
         }
-    });
-}
+    })
+}();
 
 //Add a line-through completed todo
-function markItemComplete() {
+var markItemComplete = function() {
     $todoList.on('click', 'li', function() {
         $(this).toggleClass('completed');
     })
-}
-
-//Add item to list when button is clicked
-$todoButton.on('click', function() {
-    addNewTodoItem();
-    console.log(todos);
-})
-
-$(document).ready(function() {
-    preventEnter();
-    markItemComplete();
-    deleteTodoItem();
-});
+}();
